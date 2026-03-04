@@ -1,0 +1,25 @@
+{
+  "name": "weather-service",
+  "version": "1.0.0",
+  "description": "Express weather microservice for OTel sandbox",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch --import ./src/tracing.ts src/index.ts",
+    "build": "tsc",
+    "start": "node --import ./dist/tracing.js dist/index.js"
+  },
+  "dependencies": {
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.70.0",
+    "@opentelemetry/sdk-metrics": "^2.5.1",
+    "@opentelemetry/sdk-node": "^0.212.0",
+    "@opentelemetry/sdk-trace-node": "^2.5.1",
+    "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.7",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.3"
+  }
+}

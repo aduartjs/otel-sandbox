@@ -1,0 +1,34 @@
+services:
+  gateway-nest:
+    build:
+      context: ./gateway-nest
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./gateway-nest/src:/app/src
+    environment:
+      - NODE_ENV=development
+      - WEATHER_SERVICE_URL=http://weather-service:3001
+    depends_on:
+      - weather-service
+    networks:
+      - otel-network
+
+  weather-service:
+    build:
+      context: ./weather-service
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./weather-service/src:/app/src
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+    networks:
+      - otel-network
+
+networks:
+  otel-network:
+    driver: bridge
